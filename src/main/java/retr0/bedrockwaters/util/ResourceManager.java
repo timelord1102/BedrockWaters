@@ -70,7 +70,7 @@ public class ResourceManager {
                         if (!FabricLoader.getInstance().isModLoaded("sodium")) return;
 
                         // Disable resource pack if Sodium is loaded and forcefully reload resources.
-                        if (manager.streamResourcePacks().anyMatch(pack -> pack.getName().equals(modResourcePackId))) {
+                        if (manager.streamResourcePacks().anyMatch(pack -> pack.getId().equals(modResourcePackId))) {
                             packManager.disable(modResourcePackId);
                             MinecraftClient.getInstance().reloadResources();
                             LOGGER.warn("Dynamic water opacity is incompatible with Sodium! Mod resource pack will be disabled!");
@@ -88,10 +88,10 @@ public class ResourceManager {
                                 } else if (areModResourcesLoaded && doesPackHaveResources(resourcePack)) {
                                     areModResourcesLoaded = false;
 
-                                    if (resourcePack.getName().isEmpty())
+                                    if (resourcePack.getId().isEmpty())
                                         LOGGER.warn("Default resource pack is currently unloaded! Dynamic water opacity will be disabled!");
                                     else
-                                        LOGGER.warn("Default resources were overwritten by resource pack named {}! Dynamic water opacity will be disabled!", resourcePack.getName());
+                                        LOGGER.warn("Default resources were overwritten by resource pack named {}! Dynamic water opacity will be disabled!", resourcePack.getId());
                                     break;
                                 }
                             }
